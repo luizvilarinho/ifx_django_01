@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import DbUModel
+from .models import DbUModel, Book, Course
 
 
 class MultiDBModelAdmin(admin.ModelAdmin):
@@ -37,5 +37,23 @@ class MyUser(MultiDBModelAdmin):
     list_display_links = ('id', 'name')
 
 
+class Book_admin(MultiDBModelAdmin):
+    using = 'db_u'
+    model = Book
+
+    list_display = ('id', 'title', 'author', 'year')
+    list_display_links = ('id', 'title')
+
+
+class Course_admin(MultiDBModelAdmin):
+    using = 'db_u'
+    model = Course
+
+    list_display = ('id', 'description', 'school', 'time')
+    list_display_links = ('id', 'description')
+
+
 admin.site.register(DbUModel, MyUser)
+admin.site.register(Book, Book_admin)
+admin.site.register(Course, Course_admin)
 

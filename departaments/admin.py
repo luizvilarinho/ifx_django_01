@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import DbDModel
+from .models import DbDModel, Employee, Company
 
 
 class MultiDBModelAdmin(admin.ModelAdmin):
@@ -35,5 +35,18 @@ class DpAdmin(MultiDBModelAdmin):
     model = DbDModel
     list_display = ('id', 'departamento')
 
+class EmployeeAdmin(MultiDBModelAdmin):
+    using = 'db_d'
+    model = Employee
+    list_display = ('id', 'name', 'gender', 'departament', 'email', 'birth_date')
+
+
+class CompanyAdmin(MultiDBModelAdmin):
+    using = 'db_d'
+    model = DbDModel
+    list_display = ('id', 'name', 'category', 'country', 'city')
+
 
 admin.site.register(DbDModel, DpAdmin)
+admin.site.register(Employee, EmployeeAdmin)
+admin.site.register(Company, CompanyAdmin)
