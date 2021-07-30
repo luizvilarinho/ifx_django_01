@@ -12,5 +12,7 @@ router.register('courses', CourseViewSet, basename='Course')
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('collection/', collectionViewSet)
+    path('collection/', collectionViewSet),
+    path('auth/', include('dj_rest_auth.urls')),
+    path('auth/registration/', include('dj_rest_auth.registration.urls'))
 ]
