@@ -1,0 +1,12 @@
+# Backend Python/Django Framework/ Django Rest Framework - Intranet SCCP
+
+FROM python:3.7
+ENV PYTHONUNBUFFERED 1
+RUN mkdir /webapps
+WORKDIR /webapps
+RUN apt-get update && apt-get upgrade -y && apt-get install -y \
+g++ unixodbc-dev
+# COPY requirements.txt /webapps/
+ADD ./backend_sccp/ /webapps/
+RUN pip3 install -r /webapps/requirements.txt
+EXPOSE 8000

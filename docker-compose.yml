@@ -1,0 +1,53 @@
+version: '3.1'
+
+services:
+    postgres:
+        image: postgres:9.6
+        restart: always
+        environment:
+            POSTGRES_USER: 'sccp_db'
+            POSTGRES_PASSWORD: 'abcd1234'
+            POSTGRES_DB: 'dbSCCP'
+        ports:
+            - '5432:5432'
+        deploy:
+            resources:
+                limits:
+                    memory: 2048M
+    servpython:
+        build: 
+            context: .
+            dockerfile: dockerfile.python
+        image: servpython
+        restart: always
+        command: bash inicio.sh
+        volumes:
+            - ./backend_sccp:/webapps
+        ports:
+            - 8000:8000
+        links:
+            - postgres
+        depends_on:
+            - postgres
+        deploy:
+            resources:
+                limits:
+                    memory: 6000M
+    # servangular:        
+    #     build:
+    #       context: angular/
+    #       dockerfile: dockerfile.angular
+    #     image: servangular
+    #     ports:             
+    #         - 4200:4200
+    #     volumes:
+    #         - "/webapps/node_modules"
+    #         - .angular:/webapps"
+    #     links: 
+    #       - servpython
+    #     depends_on: 
+    #       - servpython
+    #     deploy:
+    #         resources:
+    #             limits:
+    #                 memory: 2048M

@@ -1,0 +1,9 @@
+FROM node:14.1-alpine AS builder
+WORKDIR /webapps
+COPY ./angular/package.json ./
+COPY ./angular .
+RUN npm install
+EXPOSE 4200
+RUN npm install -g @angular/cli@9
+RUN npm install -g npm-install-peers
+CMD npm start

@@ -1,0 +1,1 @@
+docker run --name dbpostgres -e POSTGRES_PASSWORD=abcd1234 -d postgres:9. -p 5432:5432
