@@ -188,6 +188,8 @@ REST_FRAMEWORK = {
     )
 }
 
+# AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend',]
+
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:4200',
     'http://localhost'
